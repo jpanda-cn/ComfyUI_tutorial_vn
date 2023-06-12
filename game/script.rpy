@@ -1,4 +1,4 @@
-﻿# The script of the game goes in this file.
+# The script of the game goes in this file.
 
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
@@ -20,189 +20,189 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    "I can't wait to learn how Stable Diffusion Works!"
+    "我迫不及待地想知道Stable Diffusion是如何工作的！"
 
-    "And this ComfyUI seems really amazing!"
+    "而且这个 ComfyUI 看起来真的很棒！"
 
-    "I enter the classroom."
+    "我走进教室。"
 
     scene teacher grin with fade
 
-    "I look beside me"
+    "我看着身边。"
 
     scene student happy with fade
 
-    "This is a good spot."
+    "这地方不错。"
 
 label basic_tutorial:
     scene teacher happy with fade
 
-    t "Now, lets start"
+    t "现在，让我们开始吧"
 
-    t "The first thing we will be talking about is the model files"
+    t "我们首先要讨论的是模型文件(model files)"
 
-    t "The big files you download from Huggingface or Civitai."
+    t "您从Huggingface或Civitai下载的大文件。"
 
-    t "What do these large .ckpt or .safetensors files really contain?"
+    t "这些大型.ckpt或.safetensors文件到底包含什么？"
 
-    t "They contain the weights for 3 different models: CLIP, the main MODEL and the VAE."
+    t "它们包含3种不同模型的权重: CLIP、主模型和 VAE。"
 
-    #t "Another name for the main Stable Diffusion MODEL is the UNET."
+    #t "Stable Diffusion MODEL 的另一个名称是 UNET。"
 
     show comfyui checkpointloader at topleft
 
-    t "In the default ComfyUI workflow this is represented by the CheckpointLoader right here."
+    t "在默认的ComfyUI工作流程中，这里由CheckpointLoader表示。"
 
-    t "It lets you select a checkpoint to load."
+    t "它允许您选择要加载的检查点(checkpoint)。"
 
-    t "You'll notice that it has 3 different outputs: MODEL, CLIP, VAE"
+    t "您将注意到它有3个不同的输出: MODEL(模型)、 CLIP、 VAE"
 
     show comfyui cliptextencode at topleft
 
-    t "Lets start with the CLIP model."
+    t "让我们从 CLIP 模型开始"
 
-    t "The CLIP model connects to the CLIPTextEncode nodes."
+    t "CLIP 模型连接到 CLIPTextEncode 节点。"
 
-    t "The CLIP is used in Stable Diffusion to encode the text to a format that the main MODEL can understand."
+    t "在Stable Diffusion中，CLIP 用于将文本编码为主 MODEL 可以理解的格式。"
 
-    t "This is why another name for it is the text encoder."
+    t "这就是为什么它的另一个名称是文本编码器。"
 
     show comfyui sampler at topleft
     
-    t "In stable diffusion the image is generated using what we refer to as a sampler."
+    t "在stable diffusion中，图像是使用我们所说的采样器生成的"
 
     show comfyui sampler_arrow at topleft
 
-    t "In ComfyUI this is represented by the sampler node."
+    t "在 ComfyUI 中，这由采样器(sampler)节点表示。"
 
-    t "The sampler takes the main Stable Diffusion MODEL as an input."
+    t "采样器(sampler)采用Stable Diffusion主模型作为输入。"
 
     show comfyui sampler_arrow_clip at topleft
 
-    t "It also takes both the positive and negative prompts encoded by the CLIP model."
+    t "它还接受由 CLIP模型 编码的正面和负面提示。"
 
     show comfyui sampler_arrow_latent at topleft
 
-    t "The final input it takes is a Latent Image."
+    t "它需要的最后输入是潜在图像(Latent Image)。"
 
-    t "Since we are generating an image from only text (txt2img) we are passing it an empty image."
+    t "因为我们只从文本(txt2img)生成图像，所以我们传递给它一个空图像。"
 
     show comfyui sampler_arrow at topleft
 
-    t "The sampler takes this input latent image, adds noise to it and then denoises it using the main MODEL."
+    t "采样器(sampler)获取输入的潜在图像，为它添加噪声，然后使用主模型对其进行去噪。"
 
-    t "The encoded positive and negative prompts are passed to the MODEL at each sampling step and are used to guide the denoising."
+    t "在每个采样步骤中，编码的正提示和负提示被传递给 主模型 ，并用于指导去噪。"
 
     show comfyui sampler at topleft
 
-    t "This gradual denoising is how Stable Diffusion generates images."
+    t "这种渐进的去噪是Stable Diffusion产生图像的方式。"
 
-    t "The sampler outputs the denoised image."
+    t "采样器(sampler)输出去噪后的图像。"
 
     show comfyui vaedecode at topleft
 
-    t "The third and final model used by stable diffusion is the VAE."
+    t "stable diffusion使用的第三个也是最后一个模型是VAE。"
 
-    t "The VAE is used to translate an image from latent space to pixel space."
+    t "VAE 用于将图像从潜在空间转换为像素空间。"
 
-    t "Latent space is the format the main Stable Diffusion MODEL understands while pixel space is the format that your image viewer understands."
+    t "潜在空间是Stable Diffusion主模型理解的格式，而像素空间是图像查看器理解的格式。"
 
     show comfyui vaedecode_arrow at topleft
 
-    t "You can see here that the VAEDecode node takes the latent image that is coming from the sampler as input and outputs a regular image."
+    t "您可以在这里看到，VAEDecode 节点将来自采样器的潜在图像作为输入并输出一个常规图像。"
 
     show comfyui vaedecode_arrow_save at topleft
 
-    t "The image is then saved to a PNG file with the SaveImage node."
+    t "然后将图像保存到带有SaveImage节点的PNG文件中。"
 
     scene black with fade
 
     show comfyui basicworkflow at top
 
-    t "And this completes the overview of the basic text to image workflow."
+    t "这就是一个基本且完整的文字转图像的工作流程了."
 
     scene teacher grin with fade
 
-    t "Any questions?"
+    t "有什么问题吗?"
 
 label q1:
     menu:
 
-        "I have a question"
+        "我有个问题"
 
-        "Can you repeat this? I didn't understand.":
+        "你能重复一遍吗？我没明白。":
 
             jump repeat
 
-        "I love you.":
+        "我爱你!":
 
             jump love
 
-        "It's ok I understand everything.":
+        "没问题,俺晓得了":
 
             jump understand
 
 label repeat:
     scene teacher grin
 
-    t "Sure that's what I'm here for"
+    t "当然，这就是我来这儿的目的"
 
     jump basic_tutorial
 
 label love:
     scene teacher surprised
 
-    t "That's not a question."
+    t "这不是个问题。"
 
     scene teacher blush
 
-    t "This is just a ComfyUI tutorial, please stay on subject."
+    t "这只是一个 ComfyUI 教程，请不要转移话题。"
     jump q1
 
 label understand:
 
     scene teacher happy
 
-    t "Great! what about our our other student?"
+    t "太好了，那我们另一个学生呢？"
 
     scene student crying with fade
 
-    s "I didn't understand anything."
+    s "我什么都不明白。"
 
-    s "It's too complicated"
+    s "太复杂了"
 
     scene student angry
 
-    s "It's way too difficult!!!"
+    s "这太难了! ! ！"
 
     scene teacher grin with fade
 
-    t "Well I need to go so you should help her."
+    t "好吧，我得走了，所以你应该帮帮她。"
 
     scene student happy with fade
 
-    s "You'll help me, Right?"
+    s "你会帮我的，对吗？"
 
 label q2:
     menu:
 
-        "What do I do"
+        "我该怎么办"
 
-        "I help her.":
+        "我帮她。":
 
             jump help_her
 
-        "Not my problem.":
+        "不关我的事。":
 
             jump not_my_problem
 
-        "To be fair you need to have a high IQ like myself to understand Stable Diffusion.":
+        "公平地说，你需要像我一样拥有高智商才能理解 Stable Diffusion.":
 
             jump high_iq
 
 label not_my_problem:
 
-    y "Not my problem."
+    y "不关我的事。"
 
     scene student angry
 
@@ -214,43 +214,43 @@ label not_my_problem:
 
     scene black with fade
 
-    "I leave"
+    "我走了"
 
     jump tutorial_2
 
 label help_her:
-    y "Sure I'll help you. What don't you understand?"
+    y "我当然会帮你，你不明白什么？"
 
     scene student blush
 
-    s "Everything"
+    s "所有的"
 
-    "Ok, this might take a while..."
+    "好吧，这可能要花点时间..。"
 
     jump tutorial_2
 
 label high_iq:
-    y "I have a high IQ so I suppose it's my duty to help those with lesser minds like yourself."
+    y "我的智商很高，所以我想我有责任帮助那些像你这样头脑低的人。"
 
     s "...."
 
     scene student grin
 
-    s "Are you for real?"
+    s "你是认真的吗？"
 
-    s "I bet you don't even know how to do prime factorization in polynomial time."
+    s "我打赌你甚至不知道怎么用多项式计算整数分解。"
 
-    y "What is that?"
+    y "啥?"
 
     scene student happy
 
-    s "I'm leaving, have a good one!"
+    s "我要走了，祝你愉快！"
 
     scene black with fade
 
     "..."
 
-    "She obviously couldn't handle my high intelligence."
+    "她显然无法应对我的高智商。"
 
     jump tutorial_2
 
@@ -258,112 +258,112 @@ label tutorial_2:
 
     scene black with fade
 
-    "The next day"
+    "第二天"
 
-    "I enter the classroom"
+    "我走进教室"
 
     scene student2 smug with fade
 
     s "Hello"
 
-    t "There you are."
+    t "坐那"
 
     scene teacher2 grin with fade
 
-    "I sit down"
+    "我坐下"
 label tutorial_2_begin:
     scene teacher2 happy
 
-    t "Lets continue where we left off."
+    t "让我们继续上次的话题。"
 
-    t "Now lets talk about prompting or what some people call \"Prompt Engineering\" to sound smart."
+    t 现在让我们来谈谈提示词，或者一些人所说的听起来就很高大上的“提示工程”。"
 
-    t "Writing good prompts is very important to get good images."
+    t "写出好的提示对于获得好的图像非常重要。"
 
     show comfyui prompt_teacher at topleft
 
-    t "Here is an example of a positive prompt."
+    t "下面是一个正面提示的例子。"
 
-    t "This is a prompt that was used to generate me."
+    t "这是一个用于生成我的提示符。"
 
-    t "Take a moment to study it."
+    t "花点时间研究一下。"
 
     "..."
 
-    t "Putting words into () will change how much effect they have on your prompt."
+    t "将单词输入()将改变它们对提示符的影响程度。"
 
-    t "(word:1.2) for example will increase the effect by 1.2 while (word:0.9) will slightly decrease the effect."
+    t "例如(word: 1.2)会增加1.2的效果，而(word: 0.9)会稍微减少效果。"
 
-    t "(word) without any weight specified is the same as (word:1.1)"
+    t "如果没有为(word)指定权重,那么他就等同于(word:1.1)"
 
     scene student2 happy with fade
 
-    s "So I can make something really cute with: (cute:1.4)"
+    s "所以我可以用(cute:1.4)来做一些非常可爱的东西"
 
     scene teacher2 grin with fade
 
-    t "Yes that will put a lot of whatever Stable Diffusion thinks \"cute\" is in your image."
+    t "是的，那会把很多Stable Diffusion认为“可爱”的东西放在你的形象中。"
 
-    t "What you think a word means and what Stable Diffusion has learned don't always match."
+    t "你理解的一个单词的含义和Stable Diffusion所学到的东西可能并不是完全一致的。"
 
     scene teacher2 happy
 
-    t "Also a weight of 1.4 might be a bit too high and could start causing issues in the image so keep that in mind."
+    t "此外，1.4的权重可能有点太高，可能会开始造成有问题的形象，所以请记住这一点。"
 
     scene student2 smug with fade
 
-    s "What about..."
+    s "怎么样..."
 
     scene student2 blush
 
-    s "What if I take your prompt and add (naked) to it?"
+    s "如果我采用您的提示并添加(裸体)呢？"
 
     scene teacher2 blush with fade
 
-    t "Please don't do this."
+    t "求你别这么做。"
 
     "..."
 
     scene teacher2 happy
 
-    t "One more thing."
+    t "还有一件事。"
 
-    t "You should try to keep your prompts simple."
+    t "您应该尽量使 提示 保持简单。"
 
     scene teacher2 angry
 
-    t "Simple is always best."
+    t "简单永远是最好的。"
 
     scene teacher2 happy
 
-    t "If you add too many contradicting terms to your prompt your image will suffer."
+    t "如果您在提示中添加太多自相矛盾的术语，您的形象将受到影响。"
 
-    t "Stable Diffusion won't be able to generate an image that respects all of them."
+    t "Stable Diffusion 无法生成一个符合全部描述词的图像。"
 
-    t "How well specific prompts works also depends on which checkpoint you are using."
+    t "具体提示的效果如何也取决于您使用的检查点(checkpoint)。"
 
-    t "A prompt that works well on one checkpoint might work badly on another."
+    t "在一个检查点上效果良好的提示可能会在另一个检查点上效果不佳。"
 
     scene teacher2 grin
 
-    t "That's it for this lesson, any questions?"
+    t "这节课就讲到这里，还有问题吗？"
 
 label q3:
     menu:
 
-        "I have a question"
+        "我有个问题"
 
-        "Can you repeat this? I didn't understand.":
+        "你能重复一遍吗？我没明白。":
             scene teacher2 happy
-            t "I would be happy to."
+            t "我会很乐意的。"
             scene black with fade
             jump tutorial_2_begin
 
-        "I love you.":
+        "我爱你":
 
             jump love_2
 
-        "It's ok I understand everything.":
+        "没关系，我什么都懂。":
 
             jump understand_2
 
@@ -371,21 +371,21 @@ label q3:
 label love_2:
     scene teacher2 surprised
 
-    t "I'm flattered."
+    t "我受宠若惊。"
 
     scene teacher2 blush
 
-    t "I like you too but not in that way."
+    t "我也喜欢你，但不是那种喜欢。"
 
     t "..."
 
-    t "But this is just a ComfyUI tutorial, please stay on subject."
+    t "但这只是一个 ComfyUI 教程，请不要转移话题。"
     jump q3
 
 label understand_2:
     scene teacher2 happy
 
-    t "Good. I'll see you at the next lesson."
+    t "很好，下节课见。"
 
     "..."
 
@@ -393,18 +393,18 @@ label understand_2:
 
     scene student2 happy
 
-    s "Do you have a moment?"
+    s "你有空吗？"
 
 label q4:
     menu:
 
-        "Do I?"
+        "我该怎么做?"
 
-        "Yes.":
+        "有.":
 
             jump go_with_her
 
-        "No.":
+        "没空.":
 
             jump dont_go_with_her
 
@@ -414,22 +414,22 @@ label dont_go_with_her:
 
     scene student2 crying
 
-    s "I just wanted to be friends."
+    s "我只是想和你做朋友。"
 
     "..."
 
     scene black with fade
 
-    "The next day"
+    "第二天"
 
     jump tutorial_3
 
 label go_with_her:
-    s "Yay, lets go outside."
+    s "耶，我们出去吧。"
 
     scene student2 angry
 
-    s "I hate being in this classroom all day."
+    s "我讨厌整天呆在教室里。"
 
     scene black with fade
 
@@ -437,217 +437,217 @@ label go_with_her:
 
     scene student_city happy with fade
 
-    s "I love Stable Diffusion."
+    s "我喜欢Stable Diffusion。"
 
-    s "I was always bad at art."
+    s "我一直不擅长艺术。"
 
-    s "But now I can make amazing art with no effort."
+    s "但是现在我可以毫不费力地创作出令人惊叹的艺术作品。"
 
-    y "It's not really no effort though."
+    y "不过也不是真的没有努力。"
 
     scene student_city surprised
 
-    y "Getting good images can be difficult and it's a real pain in the ass to get anything consistent."
+    y "获得良好的图像可能是困难的, 要做到前后一致真的很麻烦"
 
     scene student_city grin
 
-    s "Are you an artist?"
+    s "你是艺术家吗？"
 
-    s "This technology completely replaces them."
+    s "这项技术完全取代了他们。"
 
-    y "I don't think that's true."
+    y "我不这么认为。"
 
     scene student_city surprised
 
-    y "If I was an artist I would be integrating Stable Diffusion in my workflow to make my process more efficient."
+    y "如果我是一名艺术家，我会将Stable Diffusion集成到我的工作流程中，以使我的流程更有效率。"
 
-    y "Artists are going to be very good at using Stable Diffusion because they actually understand what makes an image look good."
+    y "艺术家们将非常善于使用Stable Diffusion，因为他们实际上知道是什么使图像看起来还不错。"
 
     scene student_city angry
 
-    s "Why are they so against it then?"
+    s "那他们为什么这么反对呢？"
 
-    s "Why do they want to shut it down?"
+    s "他们为什么要抵制它？"
 
-    y "It's new technology, there's going to be pushback to it."
+    y "这是新技术，会受到阻碍的。"
 
     scene student_city surprised
 
-    y "When even the people using the technology barely have any idea how it actually works you can't expect people who are not into it to know anything about it."
+    y "就连使用该技术的人也几乎不知道它实际上是如何运行的时候，所以你不能指望不了解它的人对它有任何了解。"
 
-    y "I blame the term \"Artificial intelligence\" for this."
+    y "我把这归咎于“人工智能”这个词。"
 
-    y "There's nothing intelligent about Stable Diffusion."
+    y "Stable Diffusion 没有任何智慧可言。"
 
-    y "In Computer Science even a simple algorithm like Dijkstra can be called \"Artificial Intelligence\""
+    y "在计算机科学中，即使像 Dijkstra 这样的简单算法也可以被称为“人工智能”"
 
-    y "But for regular people they think it means something that actually has Intelligence."
+    y "但对于普通人来说，他们认为这就是真正具有智力的东西。"
 
-    y "It would be less scary if the name was \"Advanced Applied Statistics\""
+    y "如果这个名字是“高级应用统计学”，那就没那么可怕了"
 
     scene student_city blush
 
-    s "So artists are not going to starve because of this?"
+    s "所以艺术家们不会因此挨饿吗？"
 
-    y "Artists are already starving."
+    y "艺术家们已经在挨饿了。"
 
     scene student_city crying
 
-    s "Poor artists"
+    s "可怜的艺术家"
 
-    y "This might lead to a few of them getting unemployed but could also open up new opportunities for those who bother to learn the technology."
+    y "这可能会导致他们中的一些人失业，但也可能为那些费心学习该技术的人开辟新的机会。"
 
     "..."
 
-    y "Well I have to go home now it was great talking to you."
+    y "好吧，我现在得回家了，和你聊天很开心。"
 
     scene student_city blush
 
-    s "Oh, yeah."
+    s "哦，好的。"
 
     scene student_city happy
 
-    s "Goodbye! I'll see you tommorow!"
+    s "拜拜! 明天见！"
 
     scene black with fade
 
     "..."
 
-    "The next day before class"
+    "第二天上课前"
 
-    "It's early morning"
+    "现在是清晨"
 
-    "I arrived early so I go to the rooftop"
+    "我到得很早，所以我去了屋顶"
 
     scene student_rooftop happy with fade
 
-    "What is she doing here?"
+    "她在这里做什么？"
 
-    y "So what are you doing on the roof this early in the morning?"
+    y "这么早你在屋顶上干什么？"
 
     scene student_rooftop surprised
 
-    s "Oh, it's you!"
+    s "啊，是你！"
 
     scene student_rooftop happy
 
-    s "I like the view"
+    s "我喜欢这里的风景"
 
-    s "And the fresh morning air."
+    s "还有清晨的新鲜空气。"
 
-    y "Me too..."
+    y "我也是......"
 
     scene student_rooftop grin
 
-    s "I was playing around with ComfyUI last night."
+    s "我昨晚在玩ComfyUI。"
 
     scene student_rooftop surprised
 
-    s "It really lets you generate what you want without any filters."
+    s "它真的可以让你在没有任何过滤器的情况下生成你想要的东西。"
 
     scene student_rooftop blush
 
-    s "You can generate anything..."
+    s "你可以生成任何东西..."
 
     s "..."
 
     scene student_rooftop crying
 
-    s "What if someone uses it to create pictures of me?"
+    s "如果有人用它来制作我的照片呢？"
 
     s "..."
 
     scene student_rooftop angry
 
-    s "If someone does that I will find them and kill them."
+    s "如果有人这样做，我会找到他们，杀了他们。"
 
-    s "So don't even think about it."
+    s "所以想都别想。"
 
-    y "There's no way to stop it."
+    y "没有办法阻止它。"
 
     scene student_rooftop surprised
 
-    y "There is a \"Safety Filter\" model but the only thing it's useful for is wasting precious vram and processing power while throwing false positives."
+    y "有一个“安全过滤器”模型，但它唯一有用的是浪费宝贵的 vram 和处理能力，同时排除掉那些负面的内容"
 
-    y "In my opinion trying to make models family friendly is a complete waste of time."
+    y "在我看来，试图让模型"家庭友好"完全是浪费时间。"
 
-    y "It's entirely up to the user what they do with the tools they are given."
+    y "这完全取决于用户如何处理他们所获得的工具。"
 
-    y "You wouldn't let a child drive a car, this is the same idea."
+    y "你不会让一个孩子开车，这是同样的想法。"
 
-    y "Except you can't actually kill someone if you misuse Stable Diffusion."
+    y "即使你滥用了Stable Diffusion你也不能真正的杀死某个人"
 
     scene student_rooftop grin
 
-    s "So you are fine with me generating whatever pictures I want of you?"
+    s "所以你同意我生成任何我想要的你的照片吗？"
 
-    y "Wh-Why do you want to generate pictures of me?"
+    y "为..为什么你想要我的照片？"
 
     scene student_rooftop blush
 
-    s "Forget I said that."
+    s "当我没说。"
 
-    s "Well, it's time for class, I'll go first."
+    s "好吧，该上课了，我先去。"
 
     scene black with fade
 
-    "Oh shit it really is time for class."
+    "哦，该死，真的该上课了。"
 
 label tutorial_3:
 
     scene teacher3 grin with fade
 
-    t "Welcome to class"
+    t "欢迎上课"
 
     scene teacher3 happy
 
-    t "Today we will be talking about the negative prompt."
+    t "今天我们将讨论负面提示(negative prompt)."
 
-    t "Negative prompts are used to tell Stable Diffusion what you don't want in your image."
+    t "负面提示用于告诉Stable Diffusion您在图像中不想要的东西。"
 
     show comfyui negative_prompt at topleft
 
-    t "Here is an example of a negative prompt."
+    t "这里有一个负面提示的例子。"
 
     t "..."
 
-    t "As you can see it contains everything I don't want in an image."
+    t "正如你所看到的，它包含了所有我不想在图像中看到的东西。"
 
-    t "Most of those should be obvious except maybe (hands)."
+    t "其中大多数应该是显而易见的，也许除了(hands)。"
 
-    t "(hands) is used in the negative prompt because the anime models create too many hands otherwise."
+    t "(hands)在负面提示中使用，因为动漫模型创造了太多的手。"
 
-    t "Usually people put (bad hands) but Stable Diffusion doesn't actually understand what a \"Bad hand\" is."
+    t "通常人们放(bad hands)，但稳定扩散实际上并不明白什么是“(bad hands)”。"
 
-    t "This is why (hands) is as effective."
+    t "这就是为什么(hands)同样有效。"
 
     scene student3 happy
 
-    s "So if I don't want a bad image I can put (bad image) in the negative prompt?"
+    s "所以，如果我不想要一个糟糕的图像，我可以把（bad image）放在负面提示中？"
 
     scene teacher3 surprised
 
-    t "No, Stable Diffusion doesn't really understand vague concepts like what a bad image is."
+    t "不，Stable Diffusion并不能真正理解像什么是坏图像这样的模糊概念。"
 
     scene teacher3 happy
 
-    t "When sampling, the negative prompt is treated almost the same way as the positive prompt."
+    t 采样时，负面提示的处理方式与正提示几乎相同。"
 
-    t "The algorithm takes the noise predicted by the positive prompt and subtracts the noise predicted with the negative prompt."
+    t "该算法采用正提示预测的噪声，并减去用负提示预测的噪声。"
 
-    t "This means that negative prompts work great for anything that can be subtracted from an image."
+    t "这意味着负面提示对任何可以从图像中减去的东西都非常有效。"
 
     scene student3 grin
 
-    s "So I could put (clothes) in the negatives to remove them from images?"
+    s "所以我可以把（clothes）放在负面提示里，把它们从图像中删除？"
 
     scene teacher3 angry
 
-    t "That would work but why would you want to do that?"
+    t "可以，但你为什么要这么做？"
 
     scene student3 grin
 
-    s "Hehehe..."
+    s "嘿嘿嘿..."
 
     s "..."
 
@@ -657,105 +657,105 @@ label tutorial_3:
 
     scene teacher3 angry
 
-    t "I think we need to have a long discussion after class about your behavior."
+    t "我觉得我们应该在课后好好讨论一下你的行为。"
 
-    t "I'll have to introduce you to my friend the safety filter."
+    t "我得把你介绍给我的朋友  安全过滤器。"
 
     scene student3 crying
 
-    s "Noooooooooooooooo."
+    s "不~~~(雪花飘飘~~~)"
 
-    s "Anything but that!"
+    s "除了那个，什么都行！"
 
     scene teacher3 angry
 
-    t "It's for your own good."
+    t "这是为了你好。"
 
     scene teacher3 blush
 
-    t "Now lets stop talking about inappropriate things."
+    t "现在我们不要再讨论不合适的事情了。"
 
     t "..."
 
     scene teacher3 happy
 
-    t "Negative prompts are as important as positive ones."
+    t "负面提示和积正面提示一样重要。"
 
-    t "So make sure you use and experiment with them."
+    t "所以一定要用它们做实验。"
 
-    t "Any questions?"
+    t "有问题吗？"
 
 label q5:
     menu:
 
-        "I have a question"
+        "我有个问题"
 
-        "Can you repeat this? I didn't understand.":
+        "你能重复一遍吗？我没明白。":
             scene teacher3 happy
-            t "Of course."
+            t "当然。"
             scene black with fade
             jump tutorial_3
 
-        "I have fallen for you teacher, please go out with me.":
+        "我爱上你了，老师，我们约会吧。":
 
             jump love_3
 
-        "It's ok I understand everything.":
+        "没关系，我什么都懂。":
 
             jump understand_3
 
 label love_3:
     scene teacher3 surprised
 
-    t "I'm way too old for you."
+    t "我对你来说太老了。"
 
     scene teacher3 blush
 
-    t "I'm happy but I must reject you."
+    t "我很高兴，但我必须拒绝你。"
 
     t "..."
 
-    t "This is just a ComfyUI tutorial, please stay on subject."
+    t "这只是一个ComfyUI教程，请保持主题。"
     jump q5
 
 label understand_3:
     scene teacher3 happy
 
-    t "Well that's it for today, I'll see you tomorrow."
+    t "今天就到这里，明天见。"
 
     "..."
 
     scene teacher3 grin
 
-    "She points at the fellow student"
+    "她指着同学"
 
-    t "Except you of course, you are coming with me."
+    t "当然除了你，你得跟我走。"
 
-    s "Grrr.."
-
-    scene student3 angry
-
-    "She seems angry"
-
-    s "I can't believe she's going to force the safety filter on me."
-
-    scene student3 crying
-
-    s "It's the worse thing ever and doesn't even work properly."
-
-    y "You kind of deserved it."
+    s "呃.."
 
     scene student3 angry
 
-    s "Nobody deserves to be treated like this, it's inhumane."
+    "她似乎很生气"
+
+    s "真不敢相信她要把安全过滤器强加给我。"
 
     scene student3 crying
 
-    y "I guess I'll see you later then?"
+    s "这是有史以来最糟糕的事情，甚至不能正常工作。"
 
-    y "Take care."
+    y "你活该。"
+
+    scene student3 angry
+
+    s "没有人应该被这样对待，这是不人道的。"
+
+    scene student3 crying
+
+    y "那我们待会儿见吧？"
+
+    y "保重。"
 
     scene black with fade
 
-    "TO BE CONTINUED"
+    "未完待续"
     return
